@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eras Concert Simulator (fan project)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { overflow: hidden; background: #000; font-family: 'Segoe UI', sans-serif; color: #fff; }
+  #ui {
+    position: fixed; top: 12px; left: 12px; width: 310px; padding: 14px; z-index: 10;
+    background: rgba(15,5,25,.65); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.15); border-radius: 14px;
+  }
+  #ui h1 { font-size: 18px; margin-bottom: 4px; }
+  #status { font-size: 13px; opacity: .85; margin-bottom: 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  button, .btn {
+    background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.25);
+    padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 12px;
+  }
+  button:hover, .btn:hover { background: rgba(255,255,255,.25); }
+  button.active { background: #ff5fc8; border-color: #ff5fc8; }
+  small { opacity: .6; font-size: 11px; line-height: 1.5; }
+  #lobby {
+    position: fixed; inset: 0; z-index: 20; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 16px;
+    background: radial-gradient(circle, rgba(58,13,74,.75), rgba(0,0,0,.9));
+  }
+  #lobby h2 { font-size: 42px; letter-spacing: 4px; text-align: center; }
+  #lobby input[type=text] { padding: 10px 14px; border-radius: 10px; border: none; font-size: 16px; width: 260px; }
+  #lobby #enter { font-size: 20px; padding: 14px 30px; background: #ff5fc8; border: none; }
+  #hint {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,.6); padding: 10px 18px; border-radius: 10px; font-size: 14px;
+  }
+  #crosshair { position: fixed; top: 50%; left: 50%; width: 6px; height: 6px; margin: -3px;
+    border-radius: 50%; background: rgba(255,255,255,.7); pointer-events: none; }
+</style>
+</head>
+<body>
+  <div id="lobby">
+    <h2>✨ THE ERAS SIMULATOR ✨</h2>
+    <p>Fan project · Concierto virtual</p>
+    <input type="text" id="name" maxlength="20" placeholder="Tu nombre de fan" />
+    <label>Color de tu outfit <input type="color" id="color" value="#ff5fc8" /></label>
+    <button id="enter">Entrar al estadio</button>
+  </div>
+
+  <div id="ui" hidden>
+    <h1>✨ Eras Concert Sim</h1>
+    <div id="status"></div>
+    <div class="row" id="eras"></div>
+    <div class="row">
+      <button id="demo">▶ Beat demo</button>
+      <label class="btn">🎵 Tu audio<input type="file" id="file" accept="audio/*" hidden /></label>
+    </div>
+    <div class="row" id="modes">
+      <button data-mode="0">🌊 Ola</button>
+      <button data-mode="1">✨ Destellos</button>
+      <button data-mode="2">💓 Pulso</button>
+    </div>
+    <div class="row" id="cams">
+      <button data-cam="fp">1ª persona</button>
+      <button data-cam="third">3ª persona</button>
+      <button data-cam="orbit">Vista libre</button>
+    </div>
+    <div class="row">
+      <button id="fw">🎆 Fuegos</button>
+      <button id="auto">Auto show</button>
+    </div>
+    <small>WASD mover · Shift correr · Espacio saltar · E saludar · Q corazones<br>
+    1-8 eras · F fuegos · C cámara · Esc soltar ratón</small>
+  </div>
+
+  <div id="hint" hidden>🖱️ Haz clic para mirar alrededor</div>
+  <div id="crosshair" hidden></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
